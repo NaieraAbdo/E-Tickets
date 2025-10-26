@@ -1,4 +1,5 @@
 using E_Tickets.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace E_Tickets
 {
@@ -12,7 +13,7 @@ namespace E_Tickets
             builder.Services.AddControllersWithViews();
 
             //Configuration of DB
-            builder.Services.AddDbContext<AppDbContext>();
+            builder.Services.AddDbContext<AppDbContext>(Options => Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
 
             var app = builder.Build();
 

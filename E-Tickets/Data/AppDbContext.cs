@@ -21,11 +21,11 @@ namespace E_Tickets.Data
 
             modelBuilder.Entity<Actor_Movie>()
                 .HasOne(m => m.Movie)
-                .WithMany();
+                .WithMany(am => am.Actors_Movies );
 
             modelBuilder.Entity<Actor_Movie>()
                 .HasOne(a => a.Actor)
-                .WithMany();
+                .WithMany(am => am.Actors_Movies);
 
             base.OnModelCreating(modelBuilder);
         }

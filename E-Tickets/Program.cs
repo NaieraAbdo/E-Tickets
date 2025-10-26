@@ -1,3 +1,5 @@
+using E_Tickets.Data;
+
 namespace E_Tickets
 {
     public class Program
@@ -8,6 +10,9 @@ namespace E_Tickets
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            //Configuration of DB
+            builder.Services.AddDbContext<AppDbContext>();
 
             var app = builder.Build();
 

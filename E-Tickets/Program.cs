@@ -1,4 +1,5 @@
 using E_Tickets.Data;
+using E_Tickets.Data.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace E_Tickets
@@ -15,6 +16,8 @@ namespace E_Tickets
             //Configuration of DB
             builder.Services.AddDbContext<AppDbContext>(Options => Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
 
+            //Dinj Service
+            builder.Services.AddScoped<IActorsService, ActorsService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

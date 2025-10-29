@@ -34,9 +34,11 @@ namespace E_Tickets.Data.Services
             return await context.Actors.FirstOrDefaultAsync(n => n.Id == id);
         }
 
-        public Actor Update(Actor newActor, int id)
+        public async Task<Actor> UpdateAsync(Actor newActor, int id)
         {
-            throw new NotImplementedException();
+            context.Update(newActor);
+            await context.SaveChangesAsync();
+            return newActor;
         }
     }
 }

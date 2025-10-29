@@ -40,6 +40,25 @@ namespace E_Tickets.Controllers
             var actorDetails = await service.GetByIdAsync(id);
             if (actorDetails == null) return View("Empty");
             return View(actorDetails);
+
         }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var actorDetails = await service.GetByIdAsync(id);
+            if (actorDetails == null) return View("Empty");
+            return View(actorDetails);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, Actor actor)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(actor);
+            }
+            await service.UpdateAsync(actor,id);
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }

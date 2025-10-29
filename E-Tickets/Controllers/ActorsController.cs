@@ -1,6 +1,8 @@
 ﻿using E_Tickets.Data;
 using E_Tickets.Data.Services;
+using E_Tickets.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace E_Tickets.Controllers
 {
@@ -12,10 +14,25 @@ namespace E_Tickets.Controllers
         {
             this.service = service;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var data = service.GetAllAsync();
+            var data = await service.GetAllAsync();
             return View(data);
+        }
+
+        public async Task<IActionResult> Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind("FullName,ProfilePictureURL,Bio")]Actor actor)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(actor);
+            }
+            service.Add(actor);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

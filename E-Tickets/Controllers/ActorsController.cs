@@ -31,8 +31,15 @@ namespace E_Tickets.Controllers
             {
                 return View(actor);
             }
-            service.Add(actor);
+           await service.AddAsync(actor);
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Details (int id)
+        {
+            var actorDetails = await service.GetByIdAsync(id);
+            if (actorDetails == null) return View("Empty");
+            return View(actorDetails);
         }
     }
 }

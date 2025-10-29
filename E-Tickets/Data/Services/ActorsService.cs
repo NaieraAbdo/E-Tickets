@@ -1,5 +1,6 @@
 ﻿using E_Tickets.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace E_Tickets.Data.Services
 {
@@ -11,10 +12,10 @@ namespace E_Tickets.Data.Services
         {
             this.context = context;
         }
-        public void Add(Actor actor)
+        public async Task AddAsync(Actor actor)
          {
-            context.Actors.Add(actor);
-            context.SaveChanges();
+           await context.Actors.AddAsync(actor);
+           await context.SaveChangesAsync();
         }
 
         public void Delete(int id)
@@ -28,9 +29,9 @@ namespace E_Tickets.Data.Services
             return Result;
         }
 
-        public Actor GetById(int id)
+        public async Task<Actor> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await context.Actors.FirstOrDefaultAsync(n => n.Id == id);
         }
 
         public Actor Update(Actor newActor, int id)

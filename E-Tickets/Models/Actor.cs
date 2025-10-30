@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using E_Tickets.Data.Base;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.InteropServices;
 
 namespace E_Tickets.Models
 {
-    public class Actor
+    public class Actor:IEntityBase
     {
         public int Id { get; set; }
         [Display(Name = "Full Name")]

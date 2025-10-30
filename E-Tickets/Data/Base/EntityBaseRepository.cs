@@ -1,8 +1,16 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
+
 namespace E_Tickets.Data.Base
 {
     public class EntityBaseRepository<T> : IEntityBaseRepository<T> where T : class, IEntityBase, new()
     {
+        private readonly AppDbContext context;
+
+        public EntityBaseRepository(AppDbContext context)
+        {
+            this.context = context;
+        }
         public Task AddAsync(T entity)
         {
             throw new NotImplementedException();
@@ -13,15 +21,16 @@ namespace E_Tickets.Data.Base
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<T>> GetAllAsync()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var Result = await context.Set<T>().ToListAsync();
+            return Result;
+        
         }
 
-        public Task<T> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<T> GetByIdAsync(int id)
+        => await context.Set<T>().FirstOrDefaultAsync(n => n.Id == id);
+        
 
         public Task<T> UpdateAsync(T newEntity, int id)
         {

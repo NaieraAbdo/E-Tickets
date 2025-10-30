@@ -1,4 +1,5 @@
 ﻿
+using E_Tickets.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace E_Tickets.Data.Base
@@ -11,14 +12,20 @@ namespace E_Tickets.Data.Base
         {
             this.context = context;
         }
-        public Task AddAsync(T entity)
+        public async Task AddAsync(T entity)
         {
-            throw new NotImplementedException();
-        }
+            await context.Set<T>().AddAsync(entity);
+            await context.SaveChangesAsync();
+        }        
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var res = await context.Set<T>().FirstOrDefaultAsync(n => n.Id == id);
+            //context.Set<T>().Remove(res);
+            //await context.SaveChangesAsync();
+            var EntityEntry = context.Entry<T>(res);
+            EntityEntry.State = EntityState.Deleted;
+            await context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
@@ -32,9 +39,11 @@ namespace E_Tickets.Data.Base
         => await context.Set<T>().FirstOrDefaultAsync(n => n.Id == id);
         
 
-        public Task<T> UpdateAsync(T newEntity, int id)
+        public async Task UpdateAsync(T newEntity, int id)
         {
-            throw new NotImplementedException();
+            var EntityEntry = context.Entry<T>(newEntity);
+            EntityEntry.State = EntityState.Modified;
+            await context.SaveChangesAsync();
         }
     }
 }

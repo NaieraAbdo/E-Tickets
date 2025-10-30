@@ -18,7 +18,11 @@ namespace E_Tickets
 
             //Dinj Service
             builder.Services.AddScoped<IActorsService, ActorsService>();
+            builder.Services.AddScoped<IProducersService, ProducersService>();
+
+
             var app = builder.Build();
+            
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

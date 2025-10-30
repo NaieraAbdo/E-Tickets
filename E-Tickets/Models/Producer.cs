@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using E_Tickets.Data.Base;
+using System.ComponentModel.DataAnnotations;
 
 namespace E_Tickets.Models
 {
-    public class Producer
+    public class Producer:IEntityBase
     {
         public int Id { get; set; }
         [Display(Name ="Full Name")]

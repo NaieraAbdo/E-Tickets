@@ -15,6 +15,8 @@ namespace E_Tickets
 
             //Configuration of DB
             builder.Services.AddDbContext<AppDbContext>(Options => Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
+            //efCore.sqlserver 
+            //to define wich db program we are deaing with
 
             //Dinj Service
             builder.Services.AddScoped<IActorsService, ActorsService>();

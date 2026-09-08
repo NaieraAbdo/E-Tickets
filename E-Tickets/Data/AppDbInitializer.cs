@@ -61,7 +61,7 @@ namespace E_Tickets.Data
                         {
                             FullName = "Actor 1",
                             Bio = "This is the Bio of the first actor",
-                            ProfilePictureURL = "wwwroot/images/actors/actor-1.jpeg"
+                            ProfilePictureURL = "https://unsplash.com/photos/mans-grey-and-black-shirt-ILip77SbmOE"
 
                         },
                         new Actor()
